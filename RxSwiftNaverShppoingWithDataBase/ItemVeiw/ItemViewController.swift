@@ -52,6 +52,7 @@ final class ItemViewController: UIViewController {
 
                 let image = element.isLike ? "heart.fill" : "heart"
                 cell.likeBtn.setImage(UIImage(systemName: image), for: .normal)
+                print(element.link)
                 
                 cell.likeBtn.rx.tap.bind { _ in
 

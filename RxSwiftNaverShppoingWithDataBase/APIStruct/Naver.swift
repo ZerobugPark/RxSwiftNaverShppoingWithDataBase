@@ -22,6 +22,7 @@ struct Item: Decodable {
     let image: String
     let lprice: String
     let mallName: String
+    let link: String
     var isLike: Bool //이건 따로 관리해야할거같은데, 필터걸리면 초기화 될 수 있으니까
     
     // enum CodingKeys - 이름 변경 불가
@@ -30,6 +31,7 @@ struct Item: Decodable {
         case image
         case lprice
         case mallName
+        case link
         
     }
     
@@ -41,6 +43,7 @@ struct Item: Decodable {
         image = try container.decode(String.self, forKey: .image)
         lprice = try container.decode(String.self, forKey: .lprice)
         mallName = try container.decode(String.self, forKey: .mallName)
+        link = try container.decode(String.self, forKey: .link)
         
         isLike = false
     }
