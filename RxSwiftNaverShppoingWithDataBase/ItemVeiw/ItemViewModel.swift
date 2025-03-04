@@ -53,8 +53,9 @@ final class ItemViewModel: BaseViewModel {
         let buttonStatus = PublishRelay<String>()
         let isEmpty = PublishRelay<Bool>()
         
+        
         input.viewDidLoad.flatMap {
-            NetworkManagerRxSwift.shared.callRequest(search: self.query, filter: self.filter)
+            NetworkManagerRxSwift.shared.callRequest(api: .getInfo(query: self.query, display: 100, sort: self.filter, startIndex: 1))
         }.bind(with: self) { owner, response in
             
             switch response {
@@ -117,8 +118,10 @@ final class ItemViewModel: BaseViewModel {
             }
             
         }.flatMap { tag in
-            NetworkManagerRxSwift.shared.callRequest(search: self.query, filter: tag)
+            
+            NetworkManagerRxSwift.shared.callRequest(api: .getInfo(query: self.query, display: 100, sort: tag, startIndex: 1))
                 .map { response in
+                    self.filter = tag
                     return (tag, response)
             }
 
