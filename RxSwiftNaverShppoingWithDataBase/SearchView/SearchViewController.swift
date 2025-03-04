@@ -56,15 +56,18 @@ class SearchViewController: UIViewController {
             
         }.disposed(by: disposeBag)
         
-        output.searchItem.asDriver(onErrorJustReturn: "").drive(with: self) { owner, text in
+        //distinctUntilChanged 이전값과 동일하면 동작안하게
+        // 안넣을 경우 엔터 연속으로 두번 칠 경우 화면전환 2개 발생
+        output.searchItem.distinctUntilChanged().asDriver(onErrorJustReturn: "").drive(with: self) { owner, text in
             let vc = ItemViewController()
             
             vc.viewModel.query = text
             
+            
             owner.navigationController?.pushViewController(vc, animated: true)
             
         }.disposed(by: disposeBag)
-        
+            
         rightButton.rx.tap.bind(with: self) { owner, _ in
             
             let vc = ItemLikeViewController()
