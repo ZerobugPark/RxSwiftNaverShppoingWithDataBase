@@ -9,6 +9,7 @@ import Foundation
 
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 final class ItemViewModel: BaseViewModel {
 
@@ -35,8 +36,11 @@ final class ItemViewModel: BaseViewModel {
     
     var query = ""
     
+    let realm = try! Realm()
+    
     init() {
         print("ItemViewModel Init")
+        print(realm.configuration.fileURL)
     }
     
     
@@ -169,7 +173,26 @@ final class ItemViewModel: BaseViewModel {
         input.likebuttonTapped.asDriver(onErrorJustReturn: 0).drive(with: self) { owner, value in
             
             owner.data[value].isLike.toggle()
+            
+            do {
+                try self.realm.write { [weak self] in
+                    
+                    guard let self = self else { return }
+                    
+                    let data = LikeItemTable(title: data[value].title, mallName: data[value].mallName, price: data[value].lprice, isliked: data[value].isLike, imgURL: data[value].image)
+                    
+                    realm.add(data)
+                    print("렘 저장 완료")
+                }
+            } catch {
+                print("렘 저장 실패")
+            }
+            
+            
             shoppingInfo.accept(owner.data)
+            
+            
+            
             
         }.disposed(by: disposeBag)
         
