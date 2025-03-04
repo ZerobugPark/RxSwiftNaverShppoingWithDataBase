@@ -36,11 +36,11 @@ final class ItemViewModel: BaseViewModel {
     
     var query = ""
     
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
     init() {
         print("ItemViewModel Init")
-        print(realm.configuration.fileURL)
+        //print(realm.configuration.fileURL)
     }
     
     

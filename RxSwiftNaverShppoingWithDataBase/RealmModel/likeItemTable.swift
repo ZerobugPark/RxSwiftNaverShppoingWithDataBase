@@ -13,10 +13,10 @@ final class LikeItemTable: Object {
     
     @Persisted(primaryKey: true) var id: ObjectId
     
-    @Persisted var title: String
+    @Persisted(indexed: true) var title: String
     @Persisted var mallName: String
     @Persisted var price: String
-    @Persisted var isliked: Bool
+    @Persisted var isLiked: Bool
     @Persisted var imgURL: String
     
     
@@ -26,7 +26,7 @@ final class LikeItemTable: Object {
         self.title = title
         self.mallName = mallName
         self.price = price
-        self.isliked = isliked
+        self.isLiked = isliked
         self.imgURL = imgURL
     }
     

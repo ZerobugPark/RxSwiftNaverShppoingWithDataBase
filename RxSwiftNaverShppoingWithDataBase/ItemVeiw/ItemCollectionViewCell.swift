@@ -111,6 +111,32 @@ final class ItemCollectionViewCell: BaseCollectionViewCell {
         
     }
     
+    func updateItemList(item: LikeItemTable) {
+        
+        let url = URL(string: item.imgURL)
+        mainImage.kf.setImage(with: url)
+        
+        mallNameLabel.text = item.mallName
+        titleLabel.text = item.title.replacingOccurrences(of: "<[^>]+>|&quot;",
+                                                          with: "",
+                                                          options: .regularExpression,
+                                                          range: nil)
+        
+        // 콤마 추가
+        if let price = Int(item.price) {
+            lpriceLabel.text = price.formatted()
+        } else {
+            lpriceLabel.text = item.price
+        }
+        
+        let image = item.isLiked ? "heart.fill" : "heart"
+        likeBtn.setImage(UIImage(systemName: image), for: .normal)
+        
+        
+    }
+    
+    
+    
     deinit {
         print("ItemCollectionViewCell Deinit")
     }

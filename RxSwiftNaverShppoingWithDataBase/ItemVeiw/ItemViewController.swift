@@ -9,6 +9,7 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import Toast
 
 final class ItemViewController: UIViewController {
 
@@ -55,7 +56,7 @@ final class ItemViewController: UIViewController {
                 cell.likeBtn.rx.tap.bind { _ in
 
                     self?.likeButtonTapped.accept((item))
-
+                    self?.view.makeToast("아이템이 추가되었습니다.", duration: 1.0)
    
                 }.disposed(by: cell.disposeBag)
 

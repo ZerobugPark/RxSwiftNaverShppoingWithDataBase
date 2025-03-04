@@ -65,6 +65,13 @@ class SearchViewController: UIViewController {
             
         }.disposed(by: disposeBag)
         
+        rightButton.rx.tap.bind(with: self) { owner, _ in
+            
+            let vc = ItemLikeViewController()
+            
+            owner.navigationController?.pushViewController(vc, animated: true)
+            
+        }.disposed(by: disposeBag)
         
   
     }
