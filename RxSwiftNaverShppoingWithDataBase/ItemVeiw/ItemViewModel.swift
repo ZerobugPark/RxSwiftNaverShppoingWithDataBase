@@ -174,22 +174,27 @@ final class ItemViewModel: BaseViewModel {
             
             owner.data[value].isLike.toggle()
             
+            
+            // 중복은 어떻게 제거하는게 좋을까? (중복제거 관련 코드 추가가 필요함)
+            // 새로 생성하다보면 id가 다르기 때문에, 중복으로 생성되는 이슈가 있음
+            
+            
+            
+            let data = LikeItemTable(title: owner.data[value].title, mallName: owner.data[value].mallName, price: owner.data[value].lprice, isliked: owner.data[value].isLike, imgURL: owner.data[value].image)
+            
+            
             do {
-                try self.realm.write { [weak self] in
-                    
-                    guard let self = self else { return }
-                    
-                    let data = LikeItemTable(title: data[value].title, mallName: data[value].mallName, price: data[value].lprice, isliked: data[value].isLike, imgURL: data[value].image)
-                    
-                    realm.add(data)
+                
+                try owner.realm.write {
+                    owner.realm.add(data)
                     print("렘 저장 완료")
                 }
             } catch {
                 print("렘 저장 실패")
             }
             
-            
             shoppingInfo.accept(owner.data)
+            
             
             
             
@@ -202,10 +207,7 @@ final class ItemViewModel: BaseViewModel {
     
     
     
-    
-   
-    
     deinit {
-        print("ItemRxViewModel DeInit")
+        print("ItemViewModel DeInit")
     }
 }
