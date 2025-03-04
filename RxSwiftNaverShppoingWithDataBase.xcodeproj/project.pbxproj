@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D052DA8E2D76EE2D0075AB35 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D052DA8D2D76EE2D0075AB35 /* RealmSwift */; };
+		D052DA912D76EE380075AB35 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D052DA902D76EE380075AB35 /* SnapKit */; };
+		D052DA942D76EE400075AB35 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D052DA932D76EE400075AB35 /* Kingfisher */; };
+		D052DA982D76EE8A0075AB35 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D052DA972D76EE8A0075AB35 /* RxCocoa */; };
+		D052DA9A2D76EE8A0075AB35 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D052DA992D76EE8A0075AB35 /* RxSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D052DA2C2D76ECC90075AB35 /* RxSwiftNaverShppoingWithDataBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwiftNaverShppoingWithDataBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D052DA942D76EE400075AB35 /* Kingfisher in Frameworks */,
+				D052DA8E2D76EE2D0075AB35 /* RealmSwift in Frameworks */,
+				D052DA9A2D76EE8A0075AB35 /* RxSwift in Frameworks */,
+				D052DA982D76EE8A0075AB35 /* RxCocoa in Frameworks */,
+				D052DA912D76EE380075AB35 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +91,11 @@
 			);
 			name = RxSwiftNaverShppoingWithDataBase;
 			packageProductDependencies = (
+				D052DA8D2D76EE2D0075AB35 /* RealmSwift */,
+				D052DA902D76EE380075AB35 /* SnapKit */,
+				D052DA932D76EE400075AB35 /* Kingfisher */,
+				D052DA972D76EE8A0075AB35 /* RxCocoa */,
+				D052DA992D76EE8A0075AB35 /* RxSwift */,
 			);
 			productName = RxSwiftNaverShppoingWithDataBase;
 			productReference = D052DA2C2D76ECC90075AB35 /* RxSwiftNaverShppoingWithDataBase.app */;
@@ -107,6 +125,12 @@
 			);
 			mainGroup = D052DA232D76ECC90075AB35;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D052DA8C2D76EE2D0075AB35 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				D052DA8F2D76EE380075AB35 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D052DA922D76EE400075AB35 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D052DA962D76EE8A0075AB35 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D052DA2D2D76ECC90075AB35 /* Products */;
 			projectDirPath = "";
@@ -341,6 +365,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D052DA8C2D76EE2D0075AB35 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 20.0.1;
+			};
+		};
+		D052DA8F2D76EE380075AB35 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		D052DA922D76EE400075AB35 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
+		D052DA962D76EE8A0075AB35 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D052DA8D2D76EE2D0075AB35 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D052DA8C2D76EE2D0075AB35 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		D052DA902D76EE380075AB35 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D052DA8F2D76EE380075AB35 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D052DA932D76EE400075AB35 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D052DA922D76EE400075AB35 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		D052DA972D76EE8A0075AB35 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D052DA962D76EE8A0075AB35 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		D052DA992D76EE8A0075AB35 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D052DA962D76EE8A0075AB35 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D052DA242D76ECC90075AB35 /* Project object */;
 }
