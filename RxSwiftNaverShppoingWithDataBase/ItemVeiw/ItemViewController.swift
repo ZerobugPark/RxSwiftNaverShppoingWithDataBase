@@ -52,7 +52,6 @@ final class ItemViewController: UIViewController {
 
                 let image = element.isLike ? "heart.fill" : "heart"
                 cell.likeBtn.setImage(UIImage(systemName: image), for: .normal)
-                print(element.link)
                 
                 cell.likeBtn.rx.tap.bind { _ in
 
@@ -64,7 +63,15 @@ final class ItemViewController: UIViewController {
 
             }.disposed(by: disposeBag)
         
-    
+        itemView.collectionView.rx.modelSelected(Item.self).bind(with: self) { owner, element in
+            
+            let vc = WebViewController()
+            vc.url = element.link
+
+            
+            owner.navigationController?.pushViewController(vc, animated: true)
+            
+        }.disposed(by: disposeBag)
         
         
         itemView.collectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -114,6 +121,8 @@ final class ItemViewController: UIViewController {
             
         }.disposed(by: disposeBag)
     }
+    
+    
     
     
     private func changeButtonColor(tag: Int) {
