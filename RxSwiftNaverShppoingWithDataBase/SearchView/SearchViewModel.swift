@@ -15,7 +15,7 @@ import RxCocoa
 final class SearchViewModel: BaseViewModel {
 
     struct Input {
-        let searchButton: ControlEvent<Void>
+        let searchButton: Observable<ControlEvent<Void>.Element>
         let searchText:  ControlProperty<String>
     }
     

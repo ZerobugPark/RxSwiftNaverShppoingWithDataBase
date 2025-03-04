@@ -39,10 +39,12 @@ class SearchViewController: UIViewController {
     
     private func bind() {
     
-        let input = SearchViewModel.Input(searchButton: searchBar.rx.searchButtonClicked,
+        
+        
+        let input = SearchViewModel.Input(searchButton: searchBar.rx.searchButtonClicked.debounce(.milliseconds(500), scheduler: MainScheduler.instance),
                                             searchText: searchBar.rx.text.orEmpty)
         
-
+        
 
         let output = viewModel.transform(input: input)
         
@@ -56,9 +58,8 @@ class SearchViewController: UIViewController {
             
         }.disposed(by: disposeBag)
         
-        //distinctUntilChanged 이전값과 동일하면 동작안하게
-        // 안넣을 경우 엔터 연속으로 두번 칠 경우 화면전환 2개 발생
-        output.searchItem.distinctUntilChanged().asDriver(onErrorJustReturn: "").drive(with: self) { owner, text in
+        
+        output.searchItem.asDriver(onErrorJustReturn: "").drive(with: self) { owner, text in
             let vc = ItemViewController()
             
             vc.viewModel.query = text
