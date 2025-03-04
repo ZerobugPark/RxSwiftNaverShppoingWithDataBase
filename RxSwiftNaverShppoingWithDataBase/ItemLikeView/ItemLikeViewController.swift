@@ -46,6 +46,10 @@ final class ItemLikeViewController: UIViewController {
         searchBar.delegate = self
     }
     
+    deinit {
+        print("ItemLikeViewController Deinit")
+    }
+    
 
  
 
