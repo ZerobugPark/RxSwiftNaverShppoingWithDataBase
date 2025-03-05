@@ -21,6 +21,7 @@ class SearchViewController: UIViewController {
     
     
     private let rightButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: nil, action: nil)
+    private let leftButton = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: nil, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,7 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
            
         navigationItem.rightBarButtonItem = rightButton
+        navigationItem.leftBarButtonItem = leftButton
         
         
         configuration()
@@ -72,6 +74,14 @@ class SearchViewController: UIViewController {
         rightButton.rx.tap.bind(with: self) { owner, _ in
             
             let vc = ItemLikeViewController()
+            
+            owner.navigationController?.pushViewController(vc, animated: true)
+            
+        }.disposed(by: disposeBag)
+        
+        leftButton.rx.tap.bind(with: self) { owner, _ in
+            
+            let vc = WishListFolderViewController()
             
             owner.navigationController?.pushViewController(vc, animated: true)
             
