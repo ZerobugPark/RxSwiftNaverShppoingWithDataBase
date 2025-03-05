@@ -22,6 +22,13 @@ final class FolderTableRepository: FolderRepository {
     
     private let realm = try! Realm()
     
+    
+    init() {
+        
+        
+        Folder.initiaiData()
+    }
+    
     func getFileURL() {
         print(realm.configuration.fileURL)
     }

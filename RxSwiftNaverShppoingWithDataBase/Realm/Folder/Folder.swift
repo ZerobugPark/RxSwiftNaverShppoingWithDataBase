@@ -22,11 +22,32 @@ final class Folder: Object {
         self.title = title
     }
     
-    convenience override init() {
-        self.init()
+    
+    static func initiaiData() {
         
+        let key = "initData"
+        let defaults = UserDefaults.standard.bool(forKey: key)
+      
         
-        let defaults = UserDefaults.standard
-        let key = "init"
+        if !defaults {
+            
+            let realm = try! Realm()
+            
+            do {
+                try realm.write {
+                    
+                    let list1 = Folder(title: "오늘 할 일")
+                    let list2 = Folder(title: "이번 주 할 일")
+                    let list3 = Folder(title: "이번 달 할 일")
+                    
+                    
+                    realm.add([list1, list2, list3])
+                }
+            } catch {
+                print("초기설정 오류")
+            }
+            
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
 }
