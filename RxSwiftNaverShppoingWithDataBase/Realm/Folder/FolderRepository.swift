@@ -14,7 +14,7 @@ protocol FolderRepository {
     func getFileURL()
     func createItem(title: String)
     func fetchAll() -> [Folder]
-    
+    func deleteItem(parentsId: ObjectId, childId: ObjectId)
 }
 
 
@@ -47,12 +47,34 @@ final class FolderTableRepository: FolderRepository {
         
     }
     
+    func deleteItem(parentsId: ObjectId, childId: ObjectId) {
+        do {
+            try realm.write {
+                
+                let parents = realm.objects(Folder.self).where { $0.id == parentsId}.first!
+                print(childId)
+                guard let child = parents.wishList.firstIndex(where: { $0.id == childId })
+                else {
+                    print("일치하는 자식 아이디가 없습니다.")
+                    return 
+                }
+                parents.wishList.remove(at: child)
+                      
+            }
+        } catch {
+            print("삭제 실패")
+        }
+        
+    }
+    
+    
     func fetchAll() -> [Folder] {
         let object = realm.objects(Folder.self)
     
         return Array(object)
     }
     
+
     
     
     

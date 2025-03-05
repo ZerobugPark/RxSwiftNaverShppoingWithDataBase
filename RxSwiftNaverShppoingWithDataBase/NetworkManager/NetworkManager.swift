@@ -114,8 +114,6 @@ class NetworkManagerRxSwift {
                 }
             }
             
-            print(request.url)
-            print(request.allHTTPHeaderFields)
             URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 if error != nil {

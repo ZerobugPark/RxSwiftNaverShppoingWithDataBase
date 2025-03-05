@@ -31,18 +31,66 @@ class WishListFolderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        repository.createItem(title: "오늘 할 일")
-//        repository.createItem(title: "이번 주 할 일")
-//        repository.createItem(title: "이번 달 할 일")
-//        
         repository.getFileURL()
         
         folder = repository.fetchAll()
-      
+        
         layout()
         configureDataSource()
         updateSnapshot()
+        
+        collectionView.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        folder = repository.fetchAll()
+        forceUpdateSnapshot()
+    }
+    
+
+    private func updateSnapshot() {
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Folder>()
+        
+        snapshot.appendSections(Section.allCases)
+        snapshot.appendItems(folder, toSection: Section.first)
+        dataSource.apply(snapshot)
+        
+    }
+    
+    private func forceUpdateSnapshot() {
+        // 화면전환시 Id로만 비교하다보니, 내부에 값이 바뀌어도 다시 업데이트를 하지 않음
+        // 강제 업데이트
+        
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems(folder)
+        dataSource.apply(snapshot)
+    }
+    
+
+    
+
+
+
+}
+
+extension WishListFolderViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = WishListViewController()
+        vc.id = folder[indexPath.item].id
+        vc.list = Array(folder[indexPath.item].wishList)
+        vc.itemTitle = folder[indexPath.item].title
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
+    }
+}
+
+// MARK: - Layout 및 셀 설정
+extension WishListFolderViewController {
     
     private func layout() {
         view.addSubview(collectionView)
@@ -50,22 +98,9 @@ class WishListFolderViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        collectionView.backgroundColor = .blue
-        
-    }
+
     
-    private func updateSnapshot() {
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Folder>()
-        
-        snapshot.appendSections(Section.allCases)
-        
-        snapshot.appendItems(folder, toSection: Section.first)
-        dataSource.apply(snapshot)
-        
     }
-    
     
     private func configureDataSource() {
         
@@ -76,16 +111,17 @@ class WishListFolderViewController: UIViewController {
             content.image = UIImage(systemName: "pencil.circle")
             
             content.text = itemIdentifier.title
-            content.textProperties.color = .black
+            content.textProperties.color = .white
             content.textProperties.font = .boldSystemFont(ofSize: 20)
             
             content.secondaryText = "\(itemIdentifier.wishList.count)개"
+            
             content.secondaryTextProperties.color = .systemGray
 
             cell.contentConfiguration = content
             
             var backgroundConfig = UIBackgroundConfiguration.listGroupedCell()
-            backgroundConfig.backgroundColor = .white
+            backgroundConfig.backgroundColor = .black
             backgroundConfig.cornerRadius = 10
             
             cell.backgroundConfiguration = backgroundConfig
@@ -106,14 +142,11 @@ class WishListFolderViewController: UIViewController {
         
         
         var congifuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        congifuration.backgroundColor = .white
+        congifuration.backgroundColor = .black
         let layout = UICollectionViewCompositionalLayout.list(using: congifuration)
         
         return layout
         
     }
-
-
-
 }
 
